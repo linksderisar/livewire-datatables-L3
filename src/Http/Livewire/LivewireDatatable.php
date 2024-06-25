@@ -149,7 +149,7 @@ class LivewireDatatable extends Component
     public function applyToTable($options)
     {
         if (isset($options['sort'])) {
-            $this->sort($options['sort'], $options['direction'] ?? null);
+            $this->sortNow($options['sort'], $options['direction'] ?? null);
         }
 
         if (isset($options['hiddenColumns']) && is_array($options['hiddenColumns'])) {
@@ -283,15 +283,7 @@ class LivewireDatatable extends Component
         }
     }
 
-    // save settings
-    public function dehydrate()
-    {
-        if ($this->persistSearch) {
-            session()->put($this->sessionStorageKey() . '_search', $this->search);
-        }
 
-        return parent::dehydrate(); // @phpstan-ignore-line
-    }
 
     public function columns()
     {
@@ -800,7 +792,7 @@ class LivewireDatatable extends Component
      * @param  string|null  $direction  needs to be 'asc' or 'desc'. set to null to toggle the current direction.
      * @return void
      */
-    public function sort($index, $direction = null)
+    public function sortNow($index, $direction = null)
     {
         if (! in_array($direction, [null, 'asc', 'desc'])) {
             throw new \Exception("Invalid direction $direction given in sort() method. Allowed values: asc, desc.");
@@ -1027,7 +1019,7 @@ class LivewireDatatable extends Component
         $this->setPage(1);
         $this->setSessionStoredFilters();
 
-        $this->emitTo('complex-query', 'resetQuery');
+        $this->dispatch('resetQuery')->to('complex-query');
     }
 
     public function removeBooleanFilter($column)
@@ -1725,7 +1717,7 @@ class LivewireDatatable extends Component
 
     public function render()
     {
-        $this->emit('refreshDynamic');
+        $this->dispatch('refreshDynamic');
 
         if ($this->persistPerPage) {
             session()->put([$this->sessionStorageKey() . '_perpage' => $this->perPage]);

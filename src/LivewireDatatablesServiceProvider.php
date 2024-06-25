@@ -49,7 +49,6 @@ class LivewireDatatablesServiceProvider extends ServiceProvider
                 __DIR__ . '/../resources/views/icons' => resource_path('views/livewire/datatables/icons'),
             ], 'views');
 
-            $this->commands([MakeDatatableCommand::class, DatatableMakeCommand::class]);
         }
 
         Route::get('/datatables/{filename}', [FileExportController::class, 'handle'])
