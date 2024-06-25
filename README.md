@@ -1,4 +1,17 @@
+# Links der isar fork details
+
+In order to maintain matrix vision data table after our Livewire 3 balluff upgrade, we had to make this package work with livewire 3.
+
+Since we only use this package partially, and only use the simple features, we only fixed the parts we use.
+
+
+
+
 # Livewire Datatables
+
+
+
+
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mediconesystems/livewire-datatables.svg?style=flat-square)](https://packagist.org/packages/mediconesystems/livewire-datatables)
 [![Total Downloads](https://img.shields.io/packagist/dt/mediconesystems/livewire-datatables.svg?style=flat-square)](https://packagist.org/packages/mediconesystems/livewire-datatables)
